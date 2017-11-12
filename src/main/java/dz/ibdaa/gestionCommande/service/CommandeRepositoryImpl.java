@@ -18,8 +18,8 @@ public class CommandeRepositoryImpl implements CommandeRepositoryCustom {
 	public List<Commande> getFilteredList(String filtre, String dateDebut, String dateFin, String filterAttribut,
 			String filterValue, int maxRowPerPage, int index) {
 
-		String querySearch = DatabaseQuery.getQueryJoinSearch("*", "Client c JOIN (" + DatabaseQuery.getQueryDateSearch("*", "Commande", "", "",
-						"DATE(dateCommande)", dateDebut, dateFin) + ") cm ON cm.client = c.id",
+		String querySearch = DatabaseQuery.getQueryJoinSearch("*", "(" + DatabaseQuery.getQueryDateSearch("*", "Commande", "", "",
+						"DATE(dateCommande)", dateDebut, dateFin) + ") cm LEFT JOIN Client c ON cm.client = c.id",
 				"c.raisonSociale c.responsable cm.numero cm.refCommandeClient", filtre, filterAttribut, filterValue)
 				+ " ORDER BY cm.dateCommande DESC";
 
