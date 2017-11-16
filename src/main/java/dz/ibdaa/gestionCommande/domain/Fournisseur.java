@@ -31,6 +31,8 @@ public class Fournisseur implements Serializable {
 	private String responsable;
 
 	private String ville;
+	
+	private String code;
 
 	public Fournisseur() {
 	}
@@ -97,6 +99,14 @@ public class Fournisseur implements Serializable {
 
 	public void setVille(String ville) {
 		this.ville = ville;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

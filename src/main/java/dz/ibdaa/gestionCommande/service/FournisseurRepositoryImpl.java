@@ -18,7 +18,7 @@ public class FournisseurRepositoryImpl implements FournisseurRepositoryCustom {
 	@Override
 	public List<Fournisseur> getFilteredList(String filtre, int maxRowPerPage, int index) {
 		String querySearch = DatabaseQuery.getQuerySearch("*", "Fournisseur f",
-				"f.raisonSociale f.cp f.responsable f.ville f.pays f.email", filtre) + " ORDER BY f.id DESC";
+				"f.code f.raisonSociale f.cp f.responsable f.ville f.pays f.email", filtre) + " ORDER BY f.id DESC";
 
 		Query query = em.createNativeQuery(querySearch, Fournisseur.class);
 		query.setMaxResults(maxRowPerPage);
@@ -31,7 +31,7 @@ public class FournisseurRepositoryImpl implements FournisseurRepositoryCustom {
 	@Override
 	public long count(String filtre) {
 		String querySearch = DatabaseQuery.getQuerySearch("count(id)", "Fournisseur f",
-				"f.raisonSociale f.cp f.responsable f.ville f.pays f.email", filtre);
+				"f.code f.raisonSociale f.cp f.responsable f.ville f.pays f.email", filtre);
 
 		Query query = em.createNativeQuery(querySearch);
 		List resultList = query.getResultList();

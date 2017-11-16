@@ -8,5 +8,8 @@ public interface CommandeRepositoryCustom {
 	
 	public List<Commande> getFilteredList(String filtre, String dateDebut, String dateFin, String filterAttribut,
 			String filterValue, int maxRowPerPage, int index);
+	
+	public long count(String filtre, String dateDebut, String dateFin, String filterAttribut,
+			String filterValue);
 
 }

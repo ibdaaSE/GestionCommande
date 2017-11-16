@@ -32,4 +32,20 @@ public class CommandeRepositoryImpl implements CommandeRepositoryCustom {
 		return resultList;
 	}
 
+	@Override
+	public long count(String filtre, String dateDebut, String dateFin, String filterAttribut, String filterValue) {
+		String querySearch = DatabaseQuery.getQueryJoinSearch("count(raisonSociale)", "(" + DatabaseQuery.getQueryDateSearch("*", "Commande", "", "",
+				"DATE(dateCommande)", dateDebut, dateFin) + ") cm LEFT JOIN Client c ON cm.client = c.id",
+		"c.raisonSociale c.responsable cm.numero cm.refCommandeClient", filtre, filterAttribut, filterValue);
+
+		Query query = em.createNativeQuery(querySearch);
+		List resultList = query.getResultList();
+		if (resultList.isEmpty()) {
+            return 0l;
+        }
+		long count = Long.valueOf(resultList.get(0).toString());
+		em.close();
+		return count;
+	}
+
 }
