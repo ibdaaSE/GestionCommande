@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande;
+package dz.ibdaa.gestionCommande.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import dz.ibdaa.gestionCommande.security.security.JwtAuthenticationEntryPoint;
-import dz.ibdaa.gestionCommande.security.security.JwtAuthenticationTokenFilter;
+import dz.ibdaa.gestionCommande.security.JwtAuthenticationEntryPoint;
+import dz.ibdaa.gestionCommande.security.JwtAuthenticationTokenFilter;
 
 @Configuration
 @EnableWebSecurity

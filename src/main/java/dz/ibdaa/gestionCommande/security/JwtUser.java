@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande.security.security;
+package dz.ibdaa.gestionCommande.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;

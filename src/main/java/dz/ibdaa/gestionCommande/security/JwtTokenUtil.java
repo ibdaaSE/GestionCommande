@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande.security.security;
+package dz.ibdaa.gestionCommande.security;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande.security.security;
+package dz.ibdaa.gestionCommande.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

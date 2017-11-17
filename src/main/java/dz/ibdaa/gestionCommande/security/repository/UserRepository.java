@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande.security.security.repository;
+package dz.ibdaa.gestionCommande.security.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

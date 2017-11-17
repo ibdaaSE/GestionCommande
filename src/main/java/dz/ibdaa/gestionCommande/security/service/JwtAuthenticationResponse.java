@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande.security.security.service;
+package dz.ibdaa.gestionCommande.security.service;
 
 import java.io.Serializable;
 

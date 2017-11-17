@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande.security.security;
+package dz.ibdaa.gestionCommande.security;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

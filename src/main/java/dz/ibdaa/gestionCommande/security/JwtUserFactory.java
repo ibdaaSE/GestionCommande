@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande.security.security;
+package dz.ibdaa.gestionCommande.security;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package dz.ibdaa.gestionCommande.security.security.controller;
+package dz.ibdaa.gestionCommande.security.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,15 +13,17 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import dz.ibdaa.gestionCommande.security.security.JwtAuthenticationRequest;
-import dz.ibdaa.gestionCommande.security.security.JwtTokenUtil;
-import dz.ibdaa.gestionCommande.security.security.JwtUser;
-import dz.ibdaa.gestionCommande.security.security.service.JwtAuthenticationResponse;
+import dz.ibdaa.gestionCommande.security.JwtAuthenticationRequest;
+import dz.ibdaa.gestionCommande.security.JwtTokenUtil;
+import dz.ibdaa.gestionCommande.security.JwtUser;
+import dz.ibdaa.gestionCommande.security.service.JwtAuthenticationResponse;
 
 @RestController
 public class AuthenticationRestController {
@@ -38,9 +40,9 @@ public class AuthenticationRestController {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @RequestMapping(value = "${jwt.route.authentication.path}", method = RequestMethod.POST)
+    @RequestMapping(value = "auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
-
+    	
         // Perform the security
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -49,7 +51,6 @@ public class AuthenticationRestController {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         // Reload password post-security so we can generate token
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails, device);
