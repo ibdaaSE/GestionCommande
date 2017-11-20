@@ -1,5 +1,7 @@
 package dz.ibdaa.gestionCommande.security.controller;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +72,16 @@ public class AuthenticationRestController {
         } else {
             return ResponseEntity.badRequest().body(null);
         }
+    }
+    
+    @RequestMapping(value = "/api/previleges", method = RequestMethod.GET)
+    public Collection getPrevileges(HttpServletRequest request) {
+    	
+        String token = request.getHeader(tokenHeader);
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+
+        return user.getAuthorities();
     }
 
 }

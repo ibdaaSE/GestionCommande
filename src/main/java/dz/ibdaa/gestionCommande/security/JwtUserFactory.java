@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import dz.ibdaa.gestionCommande.security.model.Authority;
+import dz.ibdaa.gestionCommande.security.model.Previlege;
 import dz.ibdaa.gestionCommande.security.model.User;
 
 public final class JwtUserFactory {
@@ -22,15 +23,15 @@ public final class JwtUserFactory {
                 user.getLastname(),
                 user.getEmail(),
                 user.getPassword(),
-                mapToGrantedAuthorities(user.getAuthorities()),
+                mapToGrantedAuthorities(user.getRole().getPrevileges()),
                 user.getEnabled(),
                 user.getLastPasswordResetDate()
         );
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Authority> authorities) {
+    private static List<GrantedAuthority> mapToGrantedAuthorities(List<Previlege> authorities) {
         return authorities.stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getName().name()))
+                .map(previlege -> new SimpleGrantedAuthority(previlege.getName()))
                 .collect(Collectors.toList());
     }
 }

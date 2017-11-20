@@ -7,5 +7,6 @@
 		<class>dz.ibdaa.gestionCommande.domain.Commande</class>
 		<class>dz.ibdaa.gestionCommande.domain.Fournisseur</class>
 		<class>dz.ibdaa.gestionCommande.domain.Produit</class>
+		<class>dz.ibdaa.gestionCommande.security.model.Previlege</class>
 	</persistence-unit>
 </persistence>

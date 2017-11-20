@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -18,12 +20,17 @@ public class Authority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "authorityprevileges",
+            joinColumns = {@JoinColumn(name = "authorityId", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "previlegeId", referencedColumnName = "id")})
+    private List<Previlege> previleges;
+    
+    
     @Enumerated(EnumType.STRING)
     private AuthorityName name;
-
-    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
-    private List<User> users;
 
     public Long getId() {
         return id;
@@ -41,11 +48,14 @@ public class Authority {
         this.name = name;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
+	public List<Previlege> getPrevileges() {
+		return previleges;
+	}
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
+	public void setPrevileges(List<Previlege> previleges) {
+		this.previleges = previleges;
+	}
+
+    
+    
 }

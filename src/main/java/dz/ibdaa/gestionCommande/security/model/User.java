@@ -27,12 +27,9 @@ public class User {
 
     private Date lastPasswordResetDate;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "userauthority",
-            joinColumns = {@JoinColumn(name = "userId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "authorityId", referencedColumnName = "id")})
-    private List<Authority> authorities;
+    @ManyToOne
+    @JoinColumn(name="role")
+    private Authority role;
 
     public Long getId() {
         return id;
@@ -90,15 +87,15 @@ public class User {
         this.enabled = enabled;
     }
 
-    public List<Authority> getAuthorities() {
-        return authorities;
-    }
+    public Authority getRole() {
+		return role;
+	}
 
-    public void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
-    }
+	public void setRole(Authority role) {
+		this.role = role;
+	}
 
-    public Date getLastPasswordResetDate() {
+	public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;
     }
 
