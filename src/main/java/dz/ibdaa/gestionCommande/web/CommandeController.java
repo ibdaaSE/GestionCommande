@@ -37,10 +37,9 @@ public class CommandeController {
 		return this.commandeService.getFilteredList(filter, dateDebut, dateFin, filterAttribut, filterValue, 20,
 				pageIndex);
 	}
-	
+
 	@RequestMapping(path = "/api/filteredCommandes/count")
-	public @ResponseBody long count(
-			@RequestParam(value = "filter", defaultValue = "") String filter,
+	public @ResponseBody long count(@RequestParam(value = "filter", defaultValue = "") String filter,
 			@RequestParam(value = "dateDebut", defaultValue = "") String dateDebut,
 			@RequestParam(value = "dateFin", defaultValue = "") String dateFin,
 			@RequestParam(value = "filterAttribut", defaultValue = "") String filterAttribut,
@@ -57,6 +56,28 @@ public class CommandeController {
 			this.produitRepository.save(produit);
 		}
 		return commande;
+	}
+
+	@RequestMapping(path = "/api/editCommande", method = RequestMethod.PUT)
+	@Transactional
+	public @ResponseBody Commande editCommande(@RequestBody ProduitCommande produitCommande) {
+		Commande commande = this.commandeService.save(produitCommande.getCommande());
+		if (produitCommande.isTouchedList()) {
+			this.commandeService.removeProduits(commande.getId());
+			for (Produit produit : produitCommande.getProduits()) {
+				produit.setCommande(commande);
+				this.produitRepository.save(produit);
+			}
+		}
+		return commande;
+	}
+	
+	@RequestMapping(path = "/api/deleteCommande", method = RequestMethod.DELETE)
+	@Transactional
+	public @ResponseBody Integer removeCommande(@RequestBody Integer commandeId) {
+		this.commandeService.removeProduits(commandeId);
+		this.commandeService.delete(commandeId);
+		return commandeId;
 	}
 
 }

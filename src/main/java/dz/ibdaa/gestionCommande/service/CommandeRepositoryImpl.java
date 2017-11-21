@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import dz.ibdaa.gestionCommande.domain.Commande;
+import dz.ibdaa.gestionCommande.domain.Produit;
 import dz.ibdaa.gestionCommande.util.DatabaseQuery;
 
 public class CommandeRepositoryImpl implements CommandeRepositoryCustom {
@@ -46,6 +47,27 @@ public class CommandeRepositoryImpl implements CommandeRepositoryCustom {
 		long count = Long.valueOf(resultList.get(0).toString());
 		em.close();
 		return count;
+	}
+	
+	@Override
+	public void removeProduits(Integer commandeId){
+		String querySearch = "DELETE FROM Produits WHERE commande = " + commandeId;
+		Query query = em.createNativeQuery(querySearch);
+		em.getTransaction().begin();
+		query.executeUpdate();
+		em.getTransaction().commit();
+	}
+	
+	public List<Produit> getProduits(Integer commandeId) {
+
+		String querySearch = DatabaseQuery.getQueryJoinSearch("*", "Produits p",
+				"", "", "p.commande", "" + commandeId);
+
+		Query query = em.createNativeQuery(querySearch, Produit.class);
+
+		List<Produit> resultList = query.getResultList();
+		em.close();
+		return resultList;
 	}
 
 }
