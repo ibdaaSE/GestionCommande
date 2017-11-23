@@ -1,6 +1,10 @@
 package dz.ibdaa.gestionCommande.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import dz.ibdaa.gestionCommande.security.model.Authority;
+import dz.ibdaa.gestionCommande.security.model.User;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
